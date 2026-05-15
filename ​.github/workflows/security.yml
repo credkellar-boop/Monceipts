@@ -1,15 +1,22 @@
 name: Security Scan
-on: [push]
+
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: python, javascript
+          languages: 'python'
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
