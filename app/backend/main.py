@@ -23,3 +23,16 @@ if __name__ == "__main__":
 
     api_process.join()
     watcher_process.join()
+from fastapi.responses import FileResponse
+import os
+
+@app.get("/download/{tx_hash}")
+async def download_receipt(tx_hash: str):
+    file_path = f"data/receipts/{tx_hash}.png"
+    if os.path.exists(file_path):
+        return FileResponse(
+            path=file_path, 
+            filename=f"Monceipt_{tx_hash[:8]}.png", 
+            media_type='image/png'
+        )
+    return {"error": "Receipt not found. Has it been rendered yet?"}
