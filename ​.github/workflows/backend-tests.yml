@@ -1,0 +1,26 @@
+name: Backend CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+      - name: Run Linting
+        run: |
+          pip install flake8
+          flake8 app/backend --count --select=E9,F63,F7,F82 --show-source --statistics
+      - name: Test API Response
+        run: |
+          # Simple check to ensure the server starts
+          nohup uvicorn app.backend.api.main:app --port 8000 &
+          sleep 5
+          curl -f http://localhost:8000/receipt/0xTestHash || exit 1
