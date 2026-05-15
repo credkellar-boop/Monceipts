@@ -1,41 +1,39 @@
-name: Monceipts CI
+name: Monceipts CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  quality-gate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: 📦 Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
+      - name: 🐍 Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
-      - name: Install Python Dependencies
+      - name: 🛠 Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Install Playwright Browsers
-        run: |
+          # Essential for receipt rendering worker
           playwright install chromium
           playwright install-deps
 
-      - name: Run Backend Linting (Flake8)
+      - name: 🧹 Linting (Flake8)
         run: |
-          pip install flake8
           flake8 app/backend --count --select=E9,F63,F7,F82 --show-source --statistics
 
-      - name: Verify Web3 Provider Connection
+      - name: 🔗 Monad connectivity & Core Logic Test
         env:
           MONAD_RPC_URL: "https://rpc-devnet.monad.xyz"
           CHAIN_ID: "10143"
         run: |
-          python -c "from app.backend.core.web3_provider import MonadProvider; m = MonadProvider(); print('Connected:', m.is_connected())"
+          pytest app/backend/tests/test_core.py -v
