@@ -37,3 +37,6 @@ jobs:
           CHAIN_ID: "10143"
         run: |
           pytest app/backend/tests/test_core.py -v
+- name: Run Tests
+  run: |
+    python -m pytest
