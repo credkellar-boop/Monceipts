@@ -1,10 +1,13 @@
 # 🧾 Monceipts
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/credkellar-boop/Monceipts/main.yml?branch=main&style=for-the-badge)](https://github.com/credkellar-boop/Monceipts/actions)
-[![Monad Devnet](https://img.shields.io/badge/Monad-Chain_10143-836EF1?style=for-the-badge)](https://monad.xyz)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![Dart](https://img.shields.io/badge/Dart-Compiled-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi)
+![Web3.py](https://img.shields.io/badge/Web3.py-Monad_RPC-F37021?style=for-the-badge&logo=ethereum)
+![Monad](https://img.shields.io/badge/Monad-Network-0052FF?style=for-the-badge&logo=web3)
+![Phantom](https://img.shields.io/badge/Phantom-Wallet-AB9FF2?style=for-the-badge&logo=phantom)
+![Dart](https://img.shields.io/badge/Dart-Compiled-0175C2?style=for-the-badge&logo=dart)
+![Stripe](https://img.shields.io/badge/Stripe-Fiat_Onramp-008CDD?style=for-the-badge&logo=stripe)
+
 
 **Monceipts** is an automated, high-fidelity payment infrastructure designed specifically for the Monad blockchain. It transforms raw transaction hashes into professional, Coinbase-style PDF/PNG receipts with integrated behavioral forensics and risk scoring.
 
