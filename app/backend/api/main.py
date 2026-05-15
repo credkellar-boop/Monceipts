@@ -24,3 +24,18 @@ async def generate_web_receipt(request: Request, tx_hash: str):
         "risk_score": forensics['risk_score'],
         "flags": forensics['flags']
     })
+from fastapi import FastAPI
+from .api import health, router
+
+app = FastAPI(
+    title="Monceipts API Portal",
+    description="Universal Payment Receipt & Forensic Analysis Engine for the Monad Ecosystem.",
+    version="1.0.4",
+    contact={
+        "name": "credkellar-boop",
+        "url": "https://github.com/credkellar-boop/Monceipts",
+    }
+)
+
+app.include_router(health.router, prefix="/v1", tags=["System Health"])
+app.include_router(router.router, prefix="/v1", tags=["Receipt Engine"])
