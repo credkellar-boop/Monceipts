@@ -1,14 +1,17 @@
-version: '3.8'
 services:
-  backend:
+  api:
     build: .
-    ports:
-      - "8000:8000"
+    depends_on:
+      - db
+      - redis
     environment:
-      - MONAD_RPC=https://rpc-devnet.monad.xyz
-    volumes:
-      - ./app:/app
-      - ./templates:/templates
-  worker:
-    build: .
-    command: python app/backend/core/listener.py
+      - REDIS_URL=redis://redis:6379
+      
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:15-alpine
+    # ... previous config
