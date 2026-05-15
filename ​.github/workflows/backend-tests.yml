@@ -24,3 +24,8 @@ jobs:
           nohup uvicorn app.backend.api.main:app --port 8000 &
           sleep 5
           curl -f http://localhost:8000/receipt/0xTestHash || exit 1
+- name: Run Tests
+  env:
+    PYTHONPATH: .
+  run: |
+    python -m pytest
