@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MONAD_RPC=https://rpc-devnet.monad.xyz
+    volumes:
+      - ./app:/app
+      - ./templates:/templates
+  worker:
+    build: .
+    command: python app/backend/core/listener.py
